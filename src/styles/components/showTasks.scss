@@ -1,0 +1,61 @@
+#show-tasks {
+  margin: 3rem auto;
+  .row:nth-child(2) {
+    margin-top: 2rem;
+  }
+  .task {
+    font-size: 1.3rem;
+    @extend %custome-card;
+    &>div{
+      @extend %custome-card;
+    }
+    &__status {
+      font-weight: bold;
+    }
+    &__name,&__desc {
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background: #f57c00 ;
+        left: 0;
+        transition: width .3s linear 0s;
+      }
+    }
+    &__name:before {
+      top: 25px;
+    }
+    &__desc:before {
+      top: 16px;
+    }
+    .btn--delete {
+      position: absolute;
+      display: block;
+      right: 5%;
+      top: 3%;
+      @media (min-width: 1200px) {
+        opacity: 0;
+        transition: opacity .2s linear 0s;
+      }
+    }
+    &:hover .btn--delete {
+      @media (min-width: 1200px) {
+        opacity: 1;
+      }
+    }
+  }
+  .done {
+    h3,p {
+      &:before {
+        width: 100%;
+      }
+    }
+  }
+}
+
+%custome-card {
+  height: 100%;
+  border-radius: 0.3rem;
+}
