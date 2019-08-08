@@ -1,18 +1,68 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="video-wrapper">
+      <video src="../assets/video/home_bg.mp4" autoplay loop muted></video>
+      <div class="shadow-layer const"></div>
+    </div>
+    <div class="container">
+      <div class="jumbotron text-center">
+        <h3>To Do</h3>
+        <h1>Just Do It!</h1>
+      </div>
+      <div class="btn-container">
+        <button type="button" class="btn btn-lg" v-on:click="showLoginPanel">Login</button>
+        <button type="button" class="btn btn-lg" v-on:click="showSignUpPanel">Signup</button>
+      </div>
+    </div>
+    <div class="user-popup" v-if="showLogin || showSignup" v-bind:class="{show: addShowClass}">
+      <login v-if="showLogin"></login>
+      <sign-up v-if="showSignup"></sign-up>
+    </div>
+    <div class="shadow-layer" v-if="showLogin || showSignup" v-bind:class="{show: addShowClass}" v-on:click="hidePanel"></div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Login from '@/components/Login.vue'
+import Signup from '@/components/Signup.vue'
+import { setTimeout } from 'timers';
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
-  }
+    "login": Login,
+    "sign-up": Signup
+  },
+  data() {
+    return {
+      showLogin: 0,
+      showSignup: 0,
+      addShowClass: 0,
+      delay: 150
+    }
+  },
+  methods: {
+    showLoginPanel: function() {
+      this.showLogin = 1;
+      setTimeout(() => {this.addShowClass = 1;}, this.delay)
+    },
+    showSignUpPanel: function() {
+      this.showSignup = 1;
+      setTimeout(() => {this.addShowClass = 1;}, this.delay)
+    },
+    hidePanel: function() {
+      this.addShowClass = 0;
+      setTimeout(() => {
+        this.showLogin = 0;
+        this.showSignup = 0;
+      }, this.delay)
+    },
+  },
 }
 </script>
+
+<style lang="scss" scoped>
+@import "@/styles/views/home.scss";
+</style>
+

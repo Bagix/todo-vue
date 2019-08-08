@@ -1,9 +1,5 @@
 <template>
-  <div class="container container--lg mt-5">
-    <add-task ></add-task>
-    <show-tasks></show-tasks>
-    <delete-popup></delete-popup>
-  </div>
+    <router-view/>
 </template>
 
 <script>
@@ -25,7 +21,3 @@ export default {
 
 }
 </script>
-
-<style lang="scss">
-@import "@/styles/global.scss";
-</style>

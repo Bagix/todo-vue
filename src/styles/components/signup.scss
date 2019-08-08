@@ -1,0 +1,17 @@
+#signup-panel {
+  .panel__title {
+    color: var(--color-2);
+  }
+  input {
+    &:focus {
+      border-color: var(--color-2);
+    }
+  }
+  .btn {
+    background-color: var(--color-2);
+    &:hover {
+      background-color: lighten($color-2, 7%);
+    }
+  }
+
+}

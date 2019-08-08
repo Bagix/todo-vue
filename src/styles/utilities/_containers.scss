@@ -1,0 +1,40 @@
+.container--lg {
+  @media (min-width: 110rem) {
+    max-width: 100rem;
+  }
+}
+.panel {
+  .panel__title {
+    color: var(--color-1);
+    font-weight: bold;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  input {
+    width: 100%;
+    font-size: 1.5rem;
+    margin: .75rem 0;
+    &:last-of-type {
+      margin-bottom: 1.75rem;
+    }
+    &:focus {
+      border-color: var(--color-1);
+      box-shadow: 0 0 0 0.2rem rgba($color-1, .25)
+    }
+  }
+  .btn {
+    margin-bottom: 1rem;
+    background-color: var(--color-1);
+    color: #fff;
+    transition: background-color .25s linear 0s;
+    &:hover {
+      background-color: lighten($color-1, 7%);
+    }
+  }
+  span a {
+    color: var(--color-1);
+  }
+}
