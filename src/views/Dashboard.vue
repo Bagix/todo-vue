@@ -1,7 +1,10 @@
 <template>
-  <div id="show-tasks">
-    <button v-on:click="logout">Logout</button>
-    <div class="row">
+  <div>
+    <top-nav></top-nav>
+    <add-task v-if="showAddTask"></add-task>
+    <show-tasks></show-tasks>
+  </div>
+    <!-- <div class="row">
       <div class="custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input" id="hideTasks" v-on:click="hide = !hide">
       <label class="custom-control-label" for="hideTasks">Hide done tasks</label>
@@ -33,50 +36,59 @@
         </div>
       </div>
     </template>
-    </div>
-  </div>
+    </div> -->
 </template>
 
 <script>
-import { db } from '../main'
-import { bus } from '../main'
-import { fireAuth } from '../main'
+// import { db } from '../main'
+ import { bus } from '../main'
+// import { fireAuth } from '../main'
+import showTasks from '@/components/showTasks.vue'
+import topNav from '@/components/topNav.vue'
+import addTask from '@/components/addTask.vue'
 
 export default {
+  components: {
+    "show-tasks": showTasks,
+    "top-nav": topNav,
+    "add-task": addTask,
+  },
   data() {
     return {
-      tasks: [],
-      hide: 0,
+      showAddTask: 0
     };
   },
-  methods: {
-    changeStatus: function(taskId, status) {
-       db.collection("tasks").doc(taskId).set({
-        status: status
-       },{merge: true})
-    },
-    showDeletePopup: function(taskId,taskName) {
-      bus.$emit("showPopup", {id: taskId, name: taskName})
-    },
-    deleteTask: function() {
-      db.collection("tasks").doc(this.tasktoDelete).delete().then(() => {this.showDP = 0;});
-    },
-    logout: function() {
-      fireAuth.signOut().then(() => {
-        this.$router.replace("login")
-      })
-    }
+  created() {
+    bus.$on("showTaskPop", () => this.showAddTask = !this.showAddTask)
   },
-  firestore () {
-    return {
-      tasks: db.collection('tasks').orderBy("createdAt")
-    }
-  },
+  // methods: {
+  //   changeStatus: function(taskId, status) {
+  //      db.collection("tasks").doc(taskId).set({
+  //       status: status
+  //      },{merge: true})
+  //   },
+  //   showDeletePopup: function(taskId,taskName) {
+  //     bus.$emit("showPopup", {id: taskId, name: taskName})
+  //   },
+  //   deleteTask: function() {
+  //     db.collection("tasks").doc(this.tasktoDelete).delete().then(() => {this.showDP = 0;});
+  //   },
+  //   logout: function() {
+  //     fireAuth.signOut().then(() => {
+  //       this.$router.replace("home")
+  //     })
+  //   }
+  // },
+  // firestore () {
+  //   return {
+  //     tasks: db.collection('tasks').orderBy("createdAt")
+  //   }
+  // },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/components/showTasks.scss";
+// @import "@/styles/components/showTasks.scss";
 </style>
 
 

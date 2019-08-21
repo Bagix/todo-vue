@@ -1,11 +1,11 @@
 <template>
-  <div id="show-tasks">
-    <div class="row">
+  <div id="show-tasks" class="container">
+
       <div class="custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input" id="hideTasks" v-on:click="hide = !hide">
       <label class="custom-control-label" for="hideTasks">Hide done tasks</label>
       </div>
-    </div>
+
     <div class="row">
     <template v-for="task in tasks">
       <div class="col-lg-4 col-md-6 mb-3" v-if="(!hide && !task.status)|| (!hide && task.status) || (hide && !task.status)">
@@ -25,8 +25,8 @@
               <p class="task__desc">
                 {{ task.description }}
               </p>
-              <button class="btn btn-orange" v-if="task.status" v-on:click="changeStatus(task.id, 0)">Undo</button>
-              <button class="btn btn-pink" v-else v-on:click="changeStatus(task.id, 1)">Done</button>
+              <button class="btn btn-orange btn-uhe" v-if="task.status" v-on:click="changeStatus(task.id, 0)">Undo</button>
+              <button class="btn btn-pink btn-uhe" v-else v-on:click="changeStatus(task.id, 1)">Done</button>
             </div>
           </div>
         </div>
@@ -56,9 +56,6 @@ export default {
     showDeletePopup: function(taskId,taskName) {
       bus.$emit("showPopup", {id: taskId, name: taskName})
     },
-    deleteTask: function() {
-      db.collection("tasks").doc(this.tasktoDelete).delete().then(() => {this.showDP = 0;});
-    }
   },
   firestore () {
     return {

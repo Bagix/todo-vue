@@ -35,9 +35,13 @@
       display: block;
       right: 5%;
       top: 3%;
+      transition: background-color .2s linear 0;
       @media (min-width: 1200px) {
         opacity: 0;
-        transition: opacity .2s linear 0s;
+        transition: background-color .2s linear 0, opacity .2s linear 0s;
+      }
+      &:hover {
+        background-color: crimson!important;
       }
     }
     &:hover .btn--delete {
@@ -52,6 +56,9 @@
         width: 100%;
       }
     }
+  }
+  .btn-uhe {
+    margin: auto;
   }
 }
 

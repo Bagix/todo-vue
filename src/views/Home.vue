@@ -10,11 +10,12 @@
         <h1>Just Do It!</h1>
       </div>
       <div class="btn-container">
-        <button type="button" class="btn btn-lg" v-on:click="showLoginPanel">Login</button>
-        <button type="button" class="btn btn-lg" v-on:click="showSignUpPanel">Signup</button>
+        <button type="button" class="btn btn-lg btn-uhe" v-on:click="showLoginPanel">Login</button>
+        <button type="button" class="btn btn-lg btn-uhe" v-on:click="showSignUpPanel">Signup</button>
       </div>
     </div>
     <div class="user-popup" v-if="showLogin || showSignup" v-bind:class="{show: addShowClass}">
+      <button class="close btn-close" v-on:click="hidePanel"><span aria-hidden="true">×</span></button>
       <login v-if="showLogin"></login>
       <sign-up v-if="showSignup"></sign-up>
     </div>

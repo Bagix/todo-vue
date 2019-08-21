@@ -4,7 +4,9 @@
   border-radius: .3rem;
   .btn--save {
     font-weight: bold;
-    font-size: 1.33rem;
     margin: 1rem 0;
+    @include breakpoint('x-small-up') {
+      font-size: 1.33rem;
+    }
   }
 }

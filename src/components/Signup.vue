@@ -3,7 +3,7 @@
     <h4 class="panel__title">Signup</h4>
     <input type="email" v-model="email" class="form-control form-control-lg" placeholder="Email">
     <input type="password" v-model="password" class="form-control form-control-lg" placeholder="Password">
-    <button class="btn btn-lg" v-on:click="signUp">Signup</button>
+    <button class="btn btn-lg btn-uhe" v-on:click="signUp">Signup</button>
     <!-- <span>Already have account? <router-link to="/login">Login</router-link></span>-->
   </div>
 </template>
