@@ -1,94 +1,62 @@
 <template>
-  <div>
+  <div id="dashboard">
     <top-nav></top-nav>
-    <add-task v-if="showAddTask"></add-task>
+      <div class="task-window" v-if="showAddTask">
+        <add-task></add-task>
+      </div>
     <show-tasks></show-tasks>
-  </div>
-    <!-- <div class="row">
-      <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="hideTasks" v-on:click="hide = !hide">
-      <label class="custom-control-label" for="hideTasks">Hide done tasks</label>
-      </div>
+    <div class="user-popup user-popup--delete" v-if="showDeleteTask" v-bind:class="{show: addShowClass}">
+      <delete-task></delete-task>
     </div>
-    <div class="row">
-    <template v-for="task in tasks">
-      <div class="col-lg-4 col-md-6 mb-3" v-if="(!hide && !task.status)|| (!hide && task.status) || (hide && !task.status)">
-        <div class="card card-image task" :style="{'background-image':'url(http://placeimg.com/501/400/'+task.id+')'}">
-        <button class="btn btn-sm btn-danger btn--delete" v-on:click="showDeletePopup(task.id, task.name)">Delete</button>
-          <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4 justify-content-center">
-            <div v-bind:class="{done: task.status}">
-              <h5 class="orange-text task__status" v-if="task.status">
-                Done 
-              </h5>
-              <h5 class="pink-text task__status" v-else>
-              NOT Done
-              </h5>
-              <h3 class="card-title pt-2 task__name">
-                <strong>{{ task.name }}</strong>
-              </h3>
-              <p class="task__desc">
-                {{ task.description }}
-              </p>
-              <button class="btn btn-orange" v-if="task.status" v-on:click="changeStatus(task.id, 0)">Undo</button>
-              <button class="btn btn-pink" v-else v-on:click="changeStatus(task.id, 1)">Done</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-    </div> -->
+    <div class="shadow-layer" v-if="showDeleteTask" v-bind:class="{show: addShowClass}"></div>
+  </div>
 </template>
 
 <script>
-// import { db } from '../main'
- import { bus } from '../main'
-// import { fireAuth } from '../main'
+import { bus } from '../main'
+import { setTimeout } from 'timers';
+ import { fireAuth } from '../main'
 import showTasks from '@/components/showTasks.vue'
 import topNav from '@/components/topNav.vue'
 import addTask from '@/components/addTask.vue'
+import deleteTask from '@/components/deletePopup.vue'
 
 export default {
   components: {
     "show-tasks": showTasks,
     "top-nav": topNav,
     "add-task": addTask,
+    "delete-task": deleteTask,
   },
   data() {
     return {
-      showAddTask: 0
+      showAddTask: 0,
+      showDeleteTask: 0,
+      addShowClass: 0
     };
   },
   created() {
-    bus.$on("showTaskPop", () => this.showAddTask = !this.showAddTask)
+    bus.$on("showTaskPop", () => this.showAddTask = !this.showAddTask);
+    bus.$on("showDeletePopup", (task) => {
+      this.showDeleteTask = !this.showDeleteTask;
+      setTimeout(() => {
+        this.addShowClass = !this.addShowClass
+        bus.$emit("deletePopup", task)
+      }, 250)
+    });
+    bus.$on("hideDeletePopup", () => {
+      this.addShowClass = !this.addShowClass
+      setTimeout(() => {
+        this.showDeleteTask = !this.showDeleteTask;
+        bus.$emit("deletePopup", task)
+      }, 250)
+    });
   },
-  // methods: {
-  //   changeStatus: function(taskId, status) {
-  //      db.collection("tasks").doc(taskId).set({
-  //       status: status
-  //      },{merge: true})
-  //   },
-  //   showDeletePopup: function(taskId,taskName) {
-  //     bus.$emit("showPopup", {id: taskId, name: taskName})
-  //   },
-  //   deleteTask: function() {
-  //     db.collection("tasks").doc(this.tasktoDelete).delete().then(() => {this.showDP = 0;});
-  //   },
-  //   logout: function() {
-  //     fireAuth.signOut().then(() => {
-  //       this.$router.replace("home")
-  //     })
-  //   }
-  // },
-  // firestore () {
-  //   return {
-  //     tasks: db.collection('tasks').orderBy("createdAt")
-  //   }
-  // },
 };
 </script>
 
 <style lang="scss" scoped>
-// @import "@/styles/components/showTasks.scss";
+@import "@/styles/views/dashboard.scss";
 </style>
 
 

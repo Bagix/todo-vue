@@ -1,0 +1,15 @@
+#dashboard {
+  min-height: 100vh;
+  perspective: 100px;
+}
+.task-window {
+  position: absolute;
+  left: 5%;
+  top: 91px;
+  width: 90vw;
+  max-width: 600px;
+  z-index: 9;
+  @include breakpoint('small-up') {
+    left: 2%;
+  }
+}

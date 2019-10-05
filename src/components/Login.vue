@@ -10,6 +10,7 @@
 
 <script>
 import { fireAuth } from '../main'
+import store from '../store/store'
 
 export default {
   name: 'login',
@@ -22,6 +23,7 @@ export default {
   methods: {
     login: function() {
       fireAuth.signInWithEmailAndPassword(this.email, this.password).then(user => {
+        store.commit('setCurrentUser', fireAuth.currentUser)
         this.$router.replace("dashboard")
       },
       error => {

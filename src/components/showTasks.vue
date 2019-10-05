@@ -54,7 +54,7 @@ export default {
        },{merge: true})
     },
     showDeletePopup: function(taskId,taskName) {
-      bus.$emit("showPopup", {id: taskId, name: taskName})
+      bus.$emit("showDeletePopup", {id: taskId, name: taskName})
     },
   },
   firestore () {

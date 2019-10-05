@@ -54,7 +54,7 @@ router.beforeEach((to, from, next) => {
   const currentUser = fireAuth.currentUser;
   const requiersAuth = to.matched.some(record => record.meta.requiersAuth)
 
-  if(requiersAuth && !currentUser) next('login')
+  if(requiersAuth && !currentUser) next('home')
   else if (!requiersAuth && currentUser) next('home')
   else next()
 })

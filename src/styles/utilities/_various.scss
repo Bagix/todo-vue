@@ -1,7 +1,7 @@
 .shadow-layer {
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   background-color: rgba(0,0,0,.6);
@@ -11,4 +11,39 @@
     z-index: 9;
     opacity: 1;
   }
+}
+.user-popup {
+  $pop-width: 500px;
+  @include flex-center;
+  position: fixed;
+  width: 100%;
+  max-width: $pop-width;
+  background-color: #fff;
+  border-radius: .3rem;
+  padding: 2rem;
+  z-index: 999;
+  @include showUpRotate;
+  @include breakpoint('x-small-down') {
+    width: 94%;
+    margin:auto;
+  }
+  @media (min-width: $pop-width + 2px) {
+    left: 50%;
+    margin-left: (($pop-width / 2) * -1);
+  }
+  .btn-close {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    font-size: 1.5rem;
+  }
+  &--delete {
+    top: 50%;
+    margin-top: -75px;
+  }
+}
+.btn-container {
+  display: flex;
+  max-width: 500px;
+  justify-content: space-around;
 }

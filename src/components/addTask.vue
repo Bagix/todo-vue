@@ -19,6 +19,7 @@
 
 <script>
 import { db } from "../main"
+import { bus } from '../main'
 
 export default {
   data() {
@@ -32,14 +33,11 @@ export default {
   },
   methods: {
     saveTask: function() {
-     /* this.$http.post("https://todo-app-a0fc8.firebaseio.com/tasks.json", this.task).then(function(data) {
-        this.$emit("refreshTasks");
-        console.log(data);
-      });*/
       this.task.createdAt = new Date();
-      db.collection("tasks").add(this.task).then(function(data) {
+      db.collection("tasks").add(this.task).then(() => {
         this.task.name = ""
         this.task.description = ""
+        bus.$emit("showTaskPop", 0);
       });
     }
   }
