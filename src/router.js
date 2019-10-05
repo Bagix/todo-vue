@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Dashboard from './views/Dashboard.vue'
-import Login from './components/Login.vue'
-import SignUp from './components/Signup.vue'
+// import Login from './components/Login.vue'
+// import SignUp from './components/Signup.vue'
 import { fireAuth } from './main'
 
 Vue.use(Router)
@@ -37,23 +37,23 @@ const router = new Router({
         requiersAuth: true
       }
     },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '/signup',
-      name: 'signup',
-      component: SignUp
-    }
+    // {
+    //   path: '/login',
+    //   name: 'login',
+    //   component: Login
+    // },
+    // {
+    //   path: '/signup',
+    //   name: 'signup',
+    //   component: SignUp
+    // }
   ]
 })
 
 router.beforeEach((to, from, next) => {
   const currentUser = fireAuth.currentUser;
   const requiersAuth = to.matched.some(record => record.meta.requiersAuth)
-
+console.log("tutaj "+fireAuth.currentUser);
   if(requiersAuth && !currentUser) next('home')
   else if (!requiersAuth && currentUser) next('home')
   else next()

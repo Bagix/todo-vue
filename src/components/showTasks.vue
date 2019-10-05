@@ -3,7 +3,7 @@
 
       <div class="custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input" id="hideTasks" v-on:click="hide = !hide">
-      <label class="custom-control-label" for="hideTasks">Hide done tasks</label>
+      <label class="custom-control-label" for="hideTasks">Hide done tasks {{currentUser.email}}</label>
       </div>
 
     <div class="row">
@@ -40,12 +40,18 @@
 import { db } from '../main'
 import { bus } from '../main'
 
+
 export default {
   data() {
     return {
       tasks: [],
       hide: 0,
     };
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.currentUser;
+    }
   },
   methods: {
     changeStatus: function(taskId, status) {

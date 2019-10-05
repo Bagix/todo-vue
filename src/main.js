@@ -39,10 +39,6 @@ const initialize = () => {
   }
 }
 
-const test = () => {
-  console.log("test")
-}
-
 fireAuth.onAuthStateChanged(user => {
   if(user) {
     store.commit('setCurrentUser', user)
@@ -51,4 +47,5 @@ fireAuth.onAuthStateChanged(user => {
   }
   initialize();
 })
+
 
