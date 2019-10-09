@@ -45,7 +45,7 @@ fireAuth.onAuthStateChanged(user => {
   } else {
     store.commit('setCurrentUser', null)
   }
-  initialize();
+initialize();
 })
 
 

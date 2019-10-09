@@ -3,7 +3,7 @@
 
       <div class="custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input" id="hideTasks" v-on:click="hide = !hide">
-      <label class="custom-control-label" for="hideTasks">Hide done tasks {{currentUser.email}}</label>
+      <label class="custom-control-label" for="hideTasks">Hide done tasks</label>
       </div>
 
     <div class="row">
@@ -65,7 +65,7 @@ export default {
   },
   firestore () {
     return {
-      tasks: db.collection('tasks').orderBy("createdAt")
+      tasks: db.collection('tasks').where('author', '==', this.currentUser.email).orderBy('createdAt')
     }
   },
 };

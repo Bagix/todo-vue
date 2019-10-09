@@ -31,8 +31,14 @@ export default {
       }
     }
   },
+    computed: {
+    currentUser() {
+      return this.$store.state.currentUser;
+    }
+  },
   methods: {
     saveTask: function() {
+      this.task.author = this.currentUser.email;
       this.task.createdAt = new Date();
       db.collection("tasks").add(this.task).then(() => {
         this.task.name = ""
