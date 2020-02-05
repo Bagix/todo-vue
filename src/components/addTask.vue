@@ -1,5 +1,6 @@
 <template>
-  <div id="add-task" class="row">
+  <div id="add-task">
+    <button class="close btn-close" v-on:click="hideTaskForm"><span aria-hidden="true">×</span></button>
     <div class="md-form input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text md-addon" id="inputGroupMaterial-sizing-default">Task Name</span>
@@ -13,7 +14,7 @@
       <textarea class="md-textarea form-control" v-model="task.description"></textarea>
     </div>
 
-    <button type="button" v-on:click="saveTask" class="col-md-12 btn btn-primary btn--save">Save</button>
+    <button type="button" v-on:click="saveTask" class="col-md-12 btn btn--save">Save</button>
   </div>
 </template>
 
@@ -45,7 +46,10 @@ export default {
         this.task.description = ""
         bus.$emit("showTaskPop", 0);
       });
-    }
+    },
+    hideTaskForm: function() {
+      bus.$emit("showTaskPop", 0);
+    },
   }
 }
 </script>

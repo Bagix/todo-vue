@@ -11,6 +11,7 @@
     }
     &__status {
       font-weight: bold;
+      color: var(--color-2);
     }
     &__name,&__desc {
       position: relative;
@@ -19,7 +20,7 @@
         position: absolute;
         width: 0;
         height: 2px;
-        background: #f57c00 ;
+        background: var(--color-4) ;
         left: 0;
         transition: width .3s linear 0s;
       }
@@ -30,13 +31,16 @@
     &__desc:before {
       top: 16px;
     }
+    .btn-action {
+      background-color: var(--color-2);
+    }
     .btn--delete {
       position: absolute;
       display: block;
       right: 5%;
       top: 3%;
       transition: background-color .2s linear 0;
-      @media (min-width: 1200px) {
+      @include breakpoint('large-up') {
         opacity: 0;
         transition: background-color .2s linear 0, opacity .2s linear 0s;
       }
@@ -45,23 +49,31 @@
       }
     }
     &:hover .btn--delete {
-      @media (min-width: 1200px) {
+      @include breakpoint('large-up') {
         opacity: 1;
       }
     }
-  }
-  .done {
-    h3,p {
-      &:before {
-        width: 100%;
+    .done {
+      h3,p {
+        &:before {
+          width: 100%;
+        }
+      }
+      .task__status {
+        color: var(--color-4);
+      }
+      .btn-action {
+        background-color: var(--color-5);
       }
     }
   }
   .btn-uhe {
     margin: auto;
+    &:hover {
+      color: #fff;
+    }
   }
 }
-
 %custome-card {
   height: 100%;
   border-radius: 0.3rem;

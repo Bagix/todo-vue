@@ -9,7 +9,11 @@
   width: 90vw;
   max-width: 600px;
   z-index: 9;
+  padding: .66rem 1.33rem;
+  border: 3px solid var(--color-2);
+  border-radius: .3rem;
+  background: #fff;
   @include breakpoint('small-up') {
-    left: 2%;
+    left: 1%;
   }
 }

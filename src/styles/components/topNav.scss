@@ -11,8 +11,17 @@
     margin: 0;
     padding: 0;
   }
+  .btn-add-task {
+    background-color: var(--color-2);
+    color: #fff;
+  }
   .btn-logout {
     font-weight: bold;
+    background-color: var(--color-4);
+    transition: background-color .2s linear 0s;
+    &:hover {
+      background-color: darken($color-4, 15%);
+    }
   }
   .btn {
     font-weight: bold;

@@ -13,10 +13,10 @@
         <button class="btn btn-sm btn-danger btn--delete" v-on:click="showDeletePopup(task.id, task.name)">Delete</button>
           <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4 justify-content-center">
             <div v-bind:class="{done: task.status}">
-              <h5 class="orange-text task__status" v-if="task.status">
+              <h5 class="task__status" v-if="task.status">
                 Done 
               </h5>
-              <h5 class="pink-text task__status" v-else>
+              <h5 class="task__status" v-else>
               NOT Done
               </h5>
               <h3 class="card-title pt-2 task__name">
@@ -25,8 +25,8 @@
               <p class="task__desc">
                 {{ task.description }}
               </p>
-              <button class="btn btn-orange btn-uhe" v-if="task.status" v-on:click="changeStatus(task.id, 0)">Undo</button>
-              <button class="btn btn-pink btn-uhe" v-else v-on:click="changeStatus(task.id, 1)">Done</button>
+              <button class="btn btn-uhe btn-action" v-if="task.status" v-on:click="changeStatus(task.id, 0)">Undo</button>
+              <button class="btn btn-uhe btn-action" v-else v-on:click="changeStatus(task.id, 1)">Done</button>
             </div>
           </div>
         </div>

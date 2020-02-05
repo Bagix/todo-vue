@@ -1,9 +1,9 @@
 <template>
     <nav id="nav">
       <ul class="menu">
-        <li><button class="btn btn-success btn-uhe" v-on:click="showTaskForm">Add Task</button></li>
+        <li><button class="btn btn-add-task btn-uhe" v-on:click="showTaskForm">Add Task</button></li>
       </ul>
-      <button class="btn btn-amber btn-logout" v-on:click="logout">Logout</button>
+      <button class="btn btn-logout" v-on:click="logout">Logout</button>
     </nav>
 </template>
 
