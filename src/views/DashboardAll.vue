@@ -1,5 +1,5 @@
 <template>
-  <div id="dashboard">
+  <div id="dashboard-all">
     <top-nav></top-nav>
       <div class="task-window" v-if="showAddTask">
         <add-task></add-task>
@@ -15,15 +15,15 @@
 <script>
 import { bus } from '../main'
 import { setTimeout } from 'timers';
-import { fireAuth } from '../main'
-import showTasks from '@/components/showTasks.vue'
+ import { fireAuth } from '../main'
+import showAllTasks from '@/components/showAllTasks.vue'
 import topNav from '@/components/topNav.vue'
 import addTask from '@/components/addTask.vue'
 import deleteTask from '@/components/deletePopup.vue'
 
 export default {
   components: {
-    "show-tasks": showTasks,
+    "show-tasks": showAllTasks,
     "top-nav": topNav,
     "add-task": addTask,
     "delete-task": deleteTask,

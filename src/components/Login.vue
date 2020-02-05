@@ -24,7 +24,7 @@ export default {
     login: function() {
       fireAuth.signInWithEmailAndPassword(this.email, this.password).then(user => {
       store.commit('setCurrentUser', fireAuth.currentUser)
-      this.$router.replace("dashboard")
+      this.$router.replace("mytasks")
       },
       error => {
         alert("Oops! " + error.message)

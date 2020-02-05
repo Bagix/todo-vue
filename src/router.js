@@ -2,8 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Dashboard from './views/Dashboard.vue'
-// import Login from './components/Login.vue'
-// import SignUp from './components/Signup.vue'
+import DashboardAll from './views/DashboardAll.vue'
 import { fireAuth } from './main'
 
 Vue.use(Router)
@@ -30,23 +29,21 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
+      path: '/mytasks',
+      name: 'mytasks',
       component: Dashboard,
       meta: {
         requiersAuth: true
       }
     },
-    // {
-    //   path: '/login',
-    //   name: 'login',
-    //   component: Login
-    // },
-    // {
-    //   path: '/signup',
-    //   name: 'signup',
-    //   component: SignUp
-    // }
+    {
+      path: '/general',
+      name: 'general',
+      component: DashboardAll,
+      meta: {
+        requiersAuth: true
+      }
+    },
   ]
 })
 
@@ -55,7 +52,7 @@ router.beforeEach((to, from, next) => {
   const requiersAuth = to.matched.some(record => record.meta.requiersAuth)
   
   if(requiersAuth && !currentUser) next('home')
-  else if (!requiersAuth && currentUser) next('dashboard')
+  else if (!requiersAuth && currentUser) next('mytasks')
   else next()
 })
 

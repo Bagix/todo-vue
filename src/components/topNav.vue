@@ -1,7 +1,9 @@
 <template>
     <nav id="nav">
+      <button class="btn btn-add-task btn-uhe" v-on:click="showTaskForm">Add Task</button>
       <ul class="menu">
-        <li><button class="btn btn-add-task btn-uhe" v-on:click="showTaskForm">Add Task</button></li>
+        <li><router-link to="/mytasks" class="btn btn-uhe">My Tasks</router-link></li>
+        <li><router-link to="/general" class="btn btn-uhe">All Tasks</router-link></li>
       </ul>
       <button class="btn btn-logout" v-on:click="logout">Logout</button>
     </nav>
@@ -19,7 +21,12 @@ export default {
   },
   methods: {
     showTaskForm: function() {
-      bus.$emit("showTaskPop", 1);
+      bus.$emit("showTaskPop", 1)
+    },
+    redirect: function(event) {
+      let destination = event.currentTarget.getAttribute('data-redirect-to')
+      console.log(destination)
+      this.$router.replace(destination)
     },
     logout: function() {
       fireAuth.signOut().then(() => {
