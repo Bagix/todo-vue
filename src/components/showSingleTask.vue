@@ -1,16 +1,16 @@
 <template>
   <div class="row task">
-    <div class="col-md-2">
-      <div class="task__author">
+    <div class="col-lg-2">
+      <div class="task__author" v-bind:title="test">
         Author:<br>
         {{ task.author }}
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-lg-8">
       <h2 class="task__name" v-bind:class="{done: task.status}"> {{ task.name }} </h2>
       <p class="task__description"> {{ task.description }}</p>
     </div>
-    <div class="col-md-2 task__actions" v-if="task.author == currentUser.email">
+    <div class="col-lg-2 task__actions" v-if="task.author == currentUser.email">
       <div class="wrapper">
         <button class="btn btn-warning btn-uhe" v-if="task.status" v-on:click="changeStatus(task.id, 0)">Undo</button>
         <button class="btn btn-success btn-uhe" v-else v-on:click="changeStatus(task.id, 1)">Done</button> 

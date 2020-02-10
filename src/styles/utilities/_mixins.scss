@@ -24,15 +24,15 @@
 
 $breakpoints: (
   'x-small-up': (min-width: 576px),
-  'small-up': (min-width: 767px),
+  'small-up': (min-width: 768px),
   'medium-up': (min-width: 992px),
   'large-up': (min-width: 1200px),
   'x-large-up': (min-width: 1600px),
-  'x-small-down': (max-width: 577px),
-  'small-down': (max-width: 769px),
-  'medium-down': (max-width: 993px),
-  'large-down': (max-width: 1201px),
-  'x-large-down': (max-width: 1601px)
+  'x-small-down': (max-width: 575px),
+  'small-down': (max-width: 767px),
+  'medium-down': (max-width: 991px),
+  'large-down': (max-width: 1119px),
+  'x-large-down': (max-width: 1599px)
 ) !default;
 
 @mixin breakpoint($breakpoint) {

@@ -1,5 +1,6 @@
 .task {
   &__name {
+    position: relative;
     width: 100%;
     text-align: left;
     padding: 0 .5rem .5rem;
@@ -11,7 +12,6 @@
       content: '';
       position: absolute;
       top: .5em;
-      left: 1.2rem;
       width: 0;
       height: 2px;
       background: var(--color-4) ;
@@ -24,12 +24,21 @@
       }
     }
   }
+  &__author {
+    @include breakpoint('medium-down') {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--gray-off);
+    }
+  }
   &__description {
     margin-top: 25px;
-    padding: .5rem 1.25rem;
-    border-left: 1px solid #EFEFEF;
-    border-right: 1px solid #EFEFEF;
     font-size: 1.25rem;
+    @include breakpoint('medium-up') {
+      padding: .5rem 1.25rem;
+      border-left: 1px solid #EFEFEF;
+    }
   }
   &__author,
   &__actions .wrapper {
@@ -37,8 +46,19 @@
     top: 75px;
   }
   &__actions{
-    .btn {
-      width: 115px;
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      @include breakpoint('medium-up') {
+        border-left: 1px solid #EFEFEF;
+        padding-left: 1rem;
+      }
+      .btn {
+        margin-bottom: 1rem;
+        @include breakpoint('medium-up') {
+          width: 115px;
+        }
+      }
     }
   }
 }

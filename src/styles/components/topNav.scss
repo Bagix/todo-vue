@@ -13,8 +13,9 @@
     > li {
       float: left;
       > .btn {
-        background-color: var(--color-1);
-        color: #fff;
+        background-color: var(--light);
+        color: var(--dark);
+        @include underlineHoverEffect(var(--dark))
       }
     }
   }
