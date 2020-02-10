@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Dashboard from './views/Dashboard.vue'
 import DashboardAll from './views/DashboardAll.vue'
+import SingleTask from './views/SingleTask.vue'
 import { fireAuth } from './main'
 
 Vue.use(Router)
@@ -40,6 +41,14 @@ const router = new Router({
       path: '/general',
       name: 'general',
       component: DashboardAll,
+      meta: {
+        requiersAuth: true
+      }
+    },
+    {
+      path: '/task/:id',
+      name: 'singleTask',
+      component: SingleTask,
       meta: {
         requiersAuth: true
       }
