@@ -13,6 +13,7 @@
 </template>
 
 <script>
+
 import { bus } from '../main'
 import { setTimeout } from 'timers';
 import { fireAuth } from '../main'
