@@ -21,20 +21,23 @@
   }
   .user-menu {
     position: fixed;
-    display: none;
-    max-height: 0;
+    max-height: 200px;
     height: auto;
-    top: 70px;
-    right: 20px;
+    top: 67px;
+    right: 21px;
     overflow: hidden;
     padding: 0;
     border-radius: .1rem;
     border: 1px solid var(--gray-off);
-    transition: max-height .2s linear;
     list-style: none;
     background-color: var(--white);
-    &.show {
-      max-height: 200px;
+    &.expand-enter-active, 
+    &.expand-leave-active {
+      transition: max-height .5s linear;
+    }
+    &.expand-enter,
+    &.expand-leave-to {
+      max-height: 0px;
     }
     > li {
       > a,
