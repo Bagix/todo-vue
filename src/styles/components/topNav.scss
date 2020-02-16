@@ -23,7 +23,7 @@
     position: fixed;
     max-height: 200px;
     height: auto;
-    top: 67px;
+    top: 68px;
     right: 21px;
     overflow: hidden;
     padding: 0;
@@ -46,8 +46,13 @@
         width: 100%;
         padding: .66rem 2rem;
         color: initial;
+        background-color: transparent;
         text-align: center;
-        cursor: pointer
+        cursor: pointer;
+        transition: background-color .1s linear 0s;
+        &:hover {
+          background-color: rgba(128,128,128,.2);
+        }
       }
     }
   }
