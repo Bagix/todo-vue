@@ -19,6 +19,43 @@
       }
     }
   }
+  .user-menu {
+    position: fixed;
+    max-height: 200px;
+    height: auto;
+    top: 68px;
+    right: 21px;
+    overflow: hidden;
+    padding: 0;
+    border-radius: .1rem;
+    border: 1px solid var(--gray-off);
+    list-style: none;
+    background-color: var(--white);
+    &.expand-enter-active, 
+    &.expand-leave-active {
+      transition: max-height .5s linear;
+    }
+    &.expand-enter,
+    &.expand-leave-to {
+      max-height: 0px;
+    }
+    > li {
+      > a,
+      > span {
+        display: block;
+        width: 100%;
+        padding: .66rem 2rem;
+        color: initial;
+        background-color: transparent;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color .1s linear 0s;
+        &:hover {
+          background-color: rgba(128,128,128,.2);
+        }
+      }
+    }
+  }
   .btn-add-task {
     background-color: var(--color-2);
     color: #fff;

@@ -1,7 +1,7 @@
 <template>
   <div class="row task">
     <div class="col-lg-2">
-      <div class="task__author" v-bind:title="test">
+      <div class="task__author">
         Author:<br>
         {{ task.author }}
       </div>
@@ -23,7 +23,6 @@
 <script>
 import { db } from '../main'
 import { bus } from '../main'
-
 
 export default {
   data() {

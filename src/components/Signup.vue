@@ -10,6 +10,7 @@
 
 <script>
 import { fireAuth } from '../main'
+import { db } from '../main'
 import store from '../store/store'
 
 export default {
@@ -17,14 +18,19 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
     }
   },
   methods: {
     signUp: function() {
       fireAuth.createUserWithEmailAndPassword(this.email, this.password).then(user => {
         store.commit('setCurrentUser', fireAuth.currentUser)
-        this.$router.replace("myTasks")
+        db.collection("users").doc(fireAuth.currentUser.uid).set({
+          first_name: "",
+          last_name: ""
+        }).then(() => {
+          this.$router.replace("my-tasks")
+        })
       },
       error => {
         alert("Oops! " + error.message)

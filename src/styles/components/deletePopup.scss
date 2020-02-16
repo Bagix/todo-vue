@@ -1,3 +1,25 @@
 #delete-popup {
-  text-align: center;
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  background-color: rgba(0,0,0,.5);
+  .content {
+    background-color: var(--white);
+    padding: 2rem 2.5rem;
+    text-align: center;
+  }
+  &.fade-enter-active, 
+  &.fade-leave-active {
+    transition: opacity .2s linear;
+  }
+  &.fade-enter,
+  &.fade-leave-to {
+    opacity: 0;
+  }
 }
