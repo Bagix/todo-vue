@@ -2,8 +2,10 @@
   <div class="row task">
     <div class="col-lg-2">
       <div class="task__author">
-        Author:<br>
-        {{ task.author }}
+        <p class="label">Author</p>
+        <img v-bind:src="user.avatar" class="avatar">
+        <p class="name">{{ user.first_name }}<br>
+        {{ user.last_name }}</p>
       </div>
     </div>
     <div class="col-lg-8">
@@ -29,6 +31,7 @@ export default {
     return {
       id: this.$route.params.id,
       task: {},
+      user: {},
     };
   },
   computed: {
@@ -48,7 +51,8 @@ export default {
   },
   firestore () {
     return {
-      task: db.collection('tasks').doc(this.id)
+      task: db.collection('tasks').doc(this.id),
+      user: db.collection('users').doc('sFG4RWZvndfXKVVqhIyUrR7B7SE3')
     }
   },
 };

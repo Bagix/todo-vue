@@ -25,11 +25,21 @@
     }
   }
   &__author {
+    text-align: center;
+    .avatar {
+      margin-bottom: 1rem;
+    }
     @include breakpoint('medium-down') {
-      text-align: center;
       margin-bottom: 2rem;
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--gray-off);
+    }
+    .label {
+      color: var(--secondary);
+    }
+    .name {
+      color: var(--info);
+      font-weight: bold;
     }
   }
   &__description {

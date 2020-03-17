@@ -3,3 +3,9 @@
 @import "utilities/containers";
 @import "utilities/various";
 @import "components/buttons";
+
+img.avatar {
+  width: 100px;
+  height: auto;
+  border-radius: 100%;
+}

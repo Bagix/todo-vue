@@ -6,11 +6,19 @@ import router from './router'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/firebase-storage'
 import {firestorePlugin} from 'vuefire'
 import store from './store/store'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUserPlus, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.config.productionTip = false;
 Vue.use(firestorePlugin);
+
+library.add(faUserPlus, faCheckCircle, faExclamationCircle)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 firebase.initializeApp({
   apiKey: "AIzaSyBjB2A3tBxZj_4A9zqnC45txntQ5qDpIfc",
@@ -23,6 +31,7 @@ firebase.initializeApp({
 })
 
 export const db = firebase.firestore();
+export const dbStorage = firebase.storage();
 export const fireAuth = firebase.auth();
 
 export const bus = new Vue();
