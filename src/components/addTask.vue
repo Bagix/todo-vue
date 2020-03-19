@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     saveTask: function() {
-      this.task.author = this.currentUser.email;
+      this.task.author = db.doc("users/" + this.currentUser.uid)
       this.task.createdAt = new Date();
       db.collection("tasks").add(this.task).then(() => {
         this.task.name = ""

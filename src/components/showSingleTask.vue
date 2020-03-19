@@ -3,16 +3,29 @@
     <div class="col-lg-2">
       <div class="task__author">
         <p class="label">Author</p>
-        <img v-bind:src="user.avatar" class="avatar">
-        <p class="name">{{ user.first_name }}<br>
-        {{ user.last_name }}</p>
+          <router-link :to="{ name: 'userProfile', params: {id: author.user_id}}" v-if="author.user_id != currentUser.uid">
+            <img v-if="author.avatar" v-bind:src="author.avatar" class="avatar">
+            <div v-else class="avatar-placeholder">
+              <font-awesome-icon icon="user" size="3x" />
+            </div>
+            <p class="name">{{ author.first_name }}<br>
+            {{ author.last_name }}</p>
+          </router-link>
+          <router-link to="/my-profile" v-else>
+            <img v-if="author.avatar" v-bind:src="author.avatar" class="avatar">
+            <div v-else class="avatar-placeholder">
+              <font-awesome-icon icon="user" size="3x" />
+            </div>
+            <p class="name">{{ author.first_name }}<br>
+            {{ author.last_name }}</p>
+          </router-link>
       </div>
     </div>
     <div class="col-lg-8">
       <h2 class="task__name" v-bind:class="{done: task.status}"> {{ task.name }} </h2>
       <p class="task__description"> {{ task.description }}</p>
     </div>
-    <div class="col-lg-2 task__actions" v-if="task.author == currentUser.email">
+    <div class="col-lg-2 task__actions" v-if="author.user_id == currentUser.uid">
       <div class="wrapper">
         <button class="btn btn-warning btn-uhe" v-if="task.status" v-on:click="changeStatus(task.id, 0)">Undo</button>
         <button class="btn btn-success btn-uhe" v-else v-on:click="changeStatus(task.id, 1)">Done</button> 
@@ -31,7 +44,7 @@ export default {
     return {
       id: this.$route.params.id,
       task: {},
-      user: {},
+      author: {}
     };
   },
   computed: {
@@ -50,9 +63,19 @@ export default {
     },
   },
   firestore () {
-    return {
-      task: db.collection('tasks').doc(this.id),
-      user: db.collection('users').doc('sFG4RWZvndfXKVVqhIyUrR7B7SE3')
+    db.collection('tasks').doc(this.id).get()
+    .then(doc => {
+        let single_task = doc.data();
+        single_task.author.get()
+        .then(res => { 
+          this.author = res.data()
+        })
+        .catch(err => console.error(err));
+    })
+    .catch(err => { console.error(err) });
+
+    return { 
+       task: db.collection('tasks').doc(this.id),
     }
   },
 };

@@ -4,19 +4,9 @@
     label {
       position: relative;
       cursor: pointer;
-      .avatar-placeholder {
-        width: 100px;
-        height: 100px;
-        border-radius: 100%;
-        border: 2px solid var(--gray);
-        @include flex-center;
-      }
     }
     input#avatar {
       display: none;
-    }
-    .btn {
-      margin-top: 1.5rem;
     }
   }
   .alert {

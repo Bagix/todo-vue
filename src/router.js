@@ -5,6 +5,7 @@ import Dashboard from './views/Dashboard.vue'
 import DashboardAll from './views/DashboardAll.vue'
 import SingleTask from './views/SingleTask.vue'
 import MyProfile from './views/MyProfile.vue'
+import Profile from './views/Profile.vue'
 import { fireAuth } from './main'
 
 Vue.use(Router)
@@ -56,8 +57,16 @@ const router = new Router({
     },
     {
       path: '/my-profile',
-      name: 'MyProfile',
+      name: 'myProfile',
       component: MyProfile,
+      meta: {
+        requiersAuth: true
+      }
+    },
+    {
+      path: '/user/:id',
+      name: 'userProfile',
+      component: Profile,
       meta: {
         requiersAuth: true
       }

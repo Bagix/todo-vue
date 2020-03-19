@@ -8,7 +8,7 @@
 
     <div class="row">
     <template v-for="task in tasks">
-      <div class="col-lg-4 col-md-6 mb-3" v-if="(!hide && !task.status)|| (!hide && task.status) || (hide && !task.status)">
+      <div :key="task.id" class="col-lg-4 col-md-6 mb-3" v-if="(!hide && !task.status)|| (!hide && task.status) || (hide && !task.status)">
         <div class="card card-image task" :style="{'background-image':'url(http://placeimg.com/501/400/'+task.id+')'}">
           <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4 justify-content-center">
             <div v-bind:class="{done: task.status}">
@@ -52,7 +52,7 @@ export default {
   },
   firestore () {
     return {
-      tasks: db.collection('tasks').where('author', '==', this.currentUser.email).orderBy('createdAt', 'desc')
+      tasks: db.collection('tasks').where('author', '==', db.doc("users/" + this.currentUser.uid)).orderBy('createdAt', 'desc')
     }
   },
 };

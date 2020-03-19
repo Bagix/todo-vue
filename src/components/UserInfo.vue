@@ -8,11 +8,11 @@
                 <img class="avatar" v-if="user.avatar" v-bind:src="user.avatar">
                 <img class="avatar" v-else-if="image" v-bind:src="image">
                 <div v-else class="avatar-placeholder">
-                 <font-awesome-icon icon="user-plus" size="3x" />
+                  <font-awesome-icon icon="user-plus" size="3x" />
                 </div>
             </label>
             <input type="file" id="avatar" class="form-control" v-on:change="onFileSelected">
-            <button class="btn btn-sm btn-outline-info" v-on:click="uploadImage">Save image</button>
+            <button class="btn btn-sm btn-outline-info" v-on:click="uploadImage" :disabled="!imageData">Save image</button>
             <transition name="fade-down">
               <div class="alert alert-success" role="alert" v-show="savedImage">
                 Image Saved! <font-awesome-icon icon="check-circle" />

@@ -34,7 +34,7 @@ export default {
     },
     logout: function() {
       fireAuth.signOut().then(() => {
-        this.$router.replace("home")
+        this.$router.replace("/")
       })
     }
   },

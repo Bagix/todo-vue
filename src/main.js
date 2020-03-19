@@ -10,13 +10,13 @@ import 'firebase/firebase-storage'
 import {firestorePlugin} from 'vuefire'
 import store from './store/store'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserPlus, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faUserPlus, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.config.productionTip = false;
 Vue.use(firestorePlugin);
 
-library.add(faUserPlus, faCheckCircle, faExclamationCircle)
+library.add(faUser, faUserPlus, faCheckCircle, faExclamationCircle)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
