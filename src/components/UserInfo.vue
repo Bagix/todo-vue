@@ -5,14 +5,15 @@
           <p class="h4 text-center py-4">Your Info</p>
           <div class="md-form user-image">
             <label for="avatar">
-                <img class="avatar" v-if="user.avatar" v-bind:src="user.avatar">
-                <img class="avatar" v-else-if="image" v-bind:src="image">
+                <img class="avatar" v-if="image" v-bind:src="image">
+                <img class="avatar" v-else-if="user.avatar" v-bind:src="user.avatar">
                 <div v-else class="avatar-placeholder">
                   <font-awesome-icon icon="user-plus" size="3x" />
                 </div>
             </label>
             <input type="file" id="avatar" class="form-control" v-on:change="onFileSelected">
             <button class="btn btn-sm btn-outline-info" v-on:click="uploadImage" :disabled="!imageData">Save image</button>
+            <progress v-if="uploadProgress > 0"  id="file-bar" :value="uploadProgress" max="100"></progress>
             <transition name="fade-down">
               <div class="alert alert-success" role="alert" v-show="savedImage">
                 Image Saved! <font-awesome-icon icon="check-circle" />
@@ -53,6 +54,7 @@
 import { fireAuth } from '../main'
 import { db } from '../main'
 import { dbStorage } from '../main'
+import { setTimeout } from 'timers';
 
 export default {
   data() {
@@ -65,6 +67,8 @@ export default {
       imageName: '',
       savedImage: 0,
       errorImage: 0,
+      uploadProgress: 0,
+      loaded: false,
     };
   },
   computed: {
@@ -99,7 +103,7 @@ export default {
     uploadImage: function() {
       const storageRef = dbStorage.ref("avatars/" + this.imageName).put(this.imageData);
       storageRef.on(`state_changed`,snapshot => {
-        
+        this.uploadProgress = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
       }, 
       error => {
         this.errorImage = 1;
@@ -110,8 +114,13 @@ export default {
           db.collection("users").doc(this.currentUser.uid).set({
             avatar: url
           },{merge: true})
-          this.savedImage = 1
-          this.image = url
+          this.uploadProgress = 100
+          setTimeout(() => {
+            this.uploadProgress = 0
+            this.savedImage = 1
+            this.image = url
+            this.imageData = 0
+          }, 500)
         });
       });
     }
@@ -125,5 +134,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  width: 350px;
+  height: 150px;
+  background: slategrey;
+}
+
+.fade-enter-active {
+  transition: opacity 3s ease-in-out;
+}
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-enter {
+  opacity: 0;
+}
   @import "@/styles/components/userInfo.scss";
 </style>

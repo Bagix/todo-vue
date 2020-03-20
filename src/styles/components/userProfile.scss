@@ -1,0 +1,15 @@
+#user-profile {
+  color: var(--gray);
+  .user {
+    &-info {
+      p {
+        text-align: center;
+        margin-bottom: .5rem;
+      }
+    }
+  }
+}
+
+body {
+  background: red;
+}
