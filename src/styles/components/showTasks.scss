@@ -3,7 +3,30 @@
   .row:nth-child(2) {
     margin-top: 2rem;
   }
+  .row {
+    @for $i from 1 to 12 {
+      .col-lg-4:nth-of-type(#{$i}n) {
+        .task {
+          @if $i < 6 {
+            transition-delay: #{$i * 0.1}s;
+          } @else {
+            transition-delay: 2s;
+          }
+        }
+      }
+    }
+  }
   .task {
+    &.pop-up {
+      &-enter {
+        transform: scale(0);
+      }
+      &-enter-active {
+        transition-property: transform;
+        transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+        transition-duration: .75s;
+      }
+    }
     font-size: 1.3rem;
     @extend %custome-card;
     &>div{
@@ -33,6 +56,7 @@
     }
     .btn-action {
       background-color: var(--color-5);
+      width: 100px;
     }
     .btn--delete {
       position: absolute;

@@ -8,24 +8,26 @@
 
     <div class="row">
     <template v-for="task in tasks">
-      <div :key="task.id" class="col-lg-4 col-md-6 mb-3" v-if="(!hide && !task.status)|| (!hide && task.status) || (hide && !task.status)">
-        <div class="card card-image task" :style="{'background-image':'url(http://placeimg.com/501/400/'+task.id+')'}">
-          <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4 justify-content-center">
-            <div v-bind:class="{done: task.status}">
-              <h5 class="task__status" v-if="task.status">
-                Done 
-              </h5>
-              <h5 class="task__status" v-else>
-              NOT Done
-              </h5>
-              <h3 class="card-title pt-2 task__name">
-                <strong>{{ task.name }}</strong>
-              </h3>
-                <router-link :to="{ name: 'singleTask', params: {id: task.id}}" class="btn btn-uhe btn-action">View</router-link>
+        <div :key="task.id" class="col-lg-4 col-md-6 mb-3" v-if="(!hide && !task.status)|| (!hide && task.status) || (hide && !task.status)">
+          <transition name="pop-up" >
+          <div class="card card-image task" v-show="loaded" :style="{'background-image':'url(http://placeimg.com/501/400/'+task.id+')'}">
+            <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4 justify-content-center">
+              <div v-bind:class="{done: task.status}">
+                <h5 class="task__status" v-if="task.status">
+                  Done 
+                </h5>
+                <h5 class="task__status" v-else>
+                NOT Done
+                </h5>
+                <h3 class="card-title pt-2 task__name">
+                  <strong>{{ task.name }}</strong>
+                </h3>
+                  <router-link :to="{ name: 'singleTask', params: {id: task.id}}" class="btn btn-uhe btn-action">View</router-link>
+              </div>
             </div>
           </div>
+          </transition>
         </div>
-      </div>
     </template>
     </div>
   </div>
@@ -34,26 +36,25 @@
 <script>
 import { db } from '../main'
 import { bus } from '../main'
-
+import { setTimeout } from 'timers';
 
 export default {
   data() {
     return {
       tasks: [],
       hide: 0,
+      loaded: 0,
     };
   },
   computed: {
   },
+  mounted() {
+    setTimeout(() => {
+    this.loaded = 1
+    }, 150)
+  },
   methods: {
-    changeStatus: function(taskId, status) {
-       db.collection("tasks").doc(taskId).set({
-        status: status
-       },{merge: true})
-    },
-    showDeletePopup: function(taskId,taskName) {
-      bus.$emit("showDeletePopup", {id: taskId, name: taskName})
-    },
+
   },
   firestore () {
     return {
