@@ -1,10 +1,10 @@
 <template>
   <div id="show-tasks" class="container">
 
-      <div class="custom-control custom-checkbox">
+    <div class="custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input" id="hideTasks" v-on:click="hide = !hide">
       <label class="custom-control-label" for="hideTasks">Hide done tasks</label>
-      </div>
+    </div>
 
     <div class="row">
     <template v-for="task in tasks">
@@ -48,10 +48,10 @@ export default {
   },
   computed: {
   },
-  mounted() {
+  created() {
     setTimeout(() => {
     this.loaded = 1
-    }, 150)
+    }, 350)
   },
   methods: {
 

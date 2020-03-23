@@ -1,9 +1,11 @@
 <template>
   <div id="dashboard">
     <top-nav></top-nav>
+    <transition name="expand">
       <div class="task-window" v-if="showAddTask">
         <add-task></add-task>
       </div>
+    </transition>
     <show-tasks></show-tasks>
   </div>
 </template>

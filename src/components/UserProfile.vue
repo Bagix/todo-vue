@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
         <p class="h4 text-center py-4">User Info</p>
-        <div class="user-image">
+        <div class="user-image" v-show="loaded">
           <img class="avatar" v-if="user.avatar" v-bind:src="user.avatar">
           <div v-else class="avatar-placeholder">
             <font-awesome-icon icon="user" size="3x" />
@@ -27,13 +27,17 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      user: {}
+      user: {},
+      loaded: 0
     }
   },
   computed: {
     currentUser() {
       return this.$store.state.currentUser
     }
+  },
+  mounted() {
+    this.loaded = 1
   },
   firestore () {
     return {

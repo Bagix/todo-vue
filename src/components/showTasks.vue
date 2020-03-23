@@ -57,7 +57,7 @@ export default {
     mounted() {
     setTimeout(() => {
     this.loaded = 1
-    }, 150)
+    }, 350)
   },
   firestore () {
     return {

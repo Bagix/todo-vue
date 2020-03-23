@@ -1,0 +1,9 @@
+.slideInUp {
+  &-enter-active {
+    transition: transform linear .3s, opacity linear .5s;
+  }
+  &-enter {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}

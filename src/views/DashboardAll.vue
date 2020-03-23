@@ -1,9 +1,11 @@
 <template>
   <div id="dashboard-all">
     <top-nav></top-nav>
+    <transition name="expand">
       <div class="task-window" v-if="showAddTask">
         <add-task></add-task>
       </div>
+    </transition>
     <show-tasks></show-tasks>
     <div class="user-popup user-popup--delete" v-if="showDeleteTask" v-bind:class="{show: addShowClass}">
       <delete-task></delete-task>
@@ -15,7 +17,7 @@
 <script>
 import { bus } from '../main'
 import { setTimeout } from 'timers';
- import { fireAuth } from '../main'
+import { fireAuth } from '../main'
 import showAllTasks from '@/components/showAllTasks.vue'
 import topNav from '@/components/topNav.vue'
 import addTask from '@/components/addTask.vue'
@@ -37,20 +39,6 @@ export default {
   },
   created() {
     bus.$on("showTaskPop", () => this.showAddTask = !this.showAddTask)
-    bus.$on("showDeletePopup", (task) => {
-      this.showDeleteTask = !this.showDeleteTask
-      setTimeout(() => {
-        this.addShowClass = !this.addShowClass
-        bus.$emit("deletePopup", task)
-      }, 250)
-    });
-    bus.$on("hideDeletePopup", () => {
-      this.addShowClass = !this.addShowClass
-      setTimeout(() => {
-        this.showDeleteTask = !this.showDeleteTask
-        bus.$emit("deletePopup", task)
-      }, 250)
-    });
   },
 };
 </script>

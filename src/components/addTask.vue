@@ -13,7 +13,6 @@
       </div>
       <textarea class="md-textarea form-control" v-model="task.description"></textarea>
     </div>
-
     <button type="button" v-on:click="saveTask" class="col-md-12 btn btn--save">Save</button>
   </div>
 </template>

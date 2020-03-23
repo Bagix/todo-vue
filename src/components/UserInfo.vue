@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
           <p class="h4 text-center py-4">Your Info</p>
-          <div class="md-form user-image">
+          <div class="md-form user-image" v-show="loaded">
             <label for="avatar">
                 <img class="avatar" v-if="image" v-bind:src="image">
                 <img class="avatar" v-else-if="user.avatar" v-bind:src="user.avatar">
@@ -13,7 +13,11 @@
             </label>
             <input type="file" id="avatar" class="form-control" v-on:change="onFileSelected">
             <button class="btn btn-sm btn-outline-info" v-on:click="uploadImage" :disabled="!imageData">Save image</button>
-            <progress v-if="uploadProgress > 0"  id="file-bar" :value="uploadProgress" max="100"></progress>
+            <transition name="fade-down">
+              <div class="progress-box" v-show="uploadProgress && imageData">
+                <div class="progress-bar" v-bind:style="{width: uploadProgress+'%'}"></div>
+              </div>
+            </transition>
             <transition name="fade-down">
               <div class="alert alert-success" role="alert" v-show="savedImage">
                 Image Saved! <font-awesome-icon icon="check-circle" />
@@ -68,7 +72,7 @@ export default {
       savedImage: 0,
       errorImage: 0,
       uploadProgress: 0,
-      loaded: false,
+      loaded: 0,
     };
   },
   computed: {
@@ -94,6 +98,7 @@ export default {
       })
     },
     onFileSelected: function(event) {
+      this.savedImage = 0
       this.imageData = event.target.files[0];
       this.image = URL.createObjectURL(this.imageData)
       let user_prefix = this.currentUser.email.match(/([^@]+)/)[0]
@@ -115,15 +120,18 @@ export default {
             avatar: url
           },{merge: true})
           this.uploadProgress = 100
+          this.imageData = 0
           setTimeout(() => {
             this.uploadProgress = 0
             this.savedImage = 1
             this.image = url
-            this.imageData = 0
           }, 500)
         });
       });
     }
+  },
+  mounted() {
+    this.loaded = 1
   },
   firestore () {
     return {
@@ -134,22 +142,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  width: 350px;
-  height: 150px;
-  background: slategrey;
-}
-
-.fade-enter-active {
-  transition: opacity 3s ease-in-out;
-}
-
-.fade-enter-to {
-  opacity: 1;
-}
-
-.fade-enter {
-  opacity: 0;
-}
   @import "@/styles/components/userInfo.scss";
 </style>
